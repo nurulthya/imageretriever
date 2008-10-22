@@ -25,8 +25,9 @@ public class Teste1 {
 		 for(int i=0;i<paths.length;i++){
 			 
 			 ImagePlus imp= new ImagePlus(paths[i]);
+			 // mostra a imagem
 			 imp.show();
-			  hist=imp.getProcessor().getHistogram();
+			 hist=imp.getProcessor().getHistogram();
 	     }
 		
 		
