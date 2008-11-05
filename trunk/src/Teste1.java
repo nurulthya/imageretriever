@@ -18,26 +18,34 @@ public class Teste1 {
 		// TODO Auto-generated method stub
 
 		int hist[];
-		String paths[];
+		File files[];
+		String classe;
 
-		paths = new Teste1().GetPath();
+		files = new Teste1().GetFiles();
 
 		// Executa esta ação para todas as imagens selecionadas no filechooser
-		for (int i = 0; i < paths.length; i++) {
+		for (int i = 0; i < files.length; i++) {
 
-			ImagePlus imp = new ImagePlus(paths[i]);
+			ImagePlus imp = new ImagePlus(files[i].getPath());
 			// mostra a imagem
-			imp.show();
+			//imp.show();
 			hist = imp.getProcessor().getHistogram();
-			escreveDados(imp, paths[i]);
+			
+			if(files[i].getName().charAt(0)=='c') classe="carro";
+			else classe="folha";
+			
+			escreveDados(imp, classe);
+			
 		}
+		
+		System.out.println("terminou");
 
 	}
 
-	public String[] GetPath() {
+	public File[] GetFiles() {
 
 		File files[];
-		String paths[];
+		
 		JFileChooser chooser = new JFileChooser();
 		chooser.setCurrentDirectory(new File("image//"));
 
@@ -47,19 +55,14 @@ public class Teste1 {
 		String path = chooser.getSelectedFile().getPath();
 		files = chooser.getSelectedFiles();
 
-		paths = new String[files.length];
-		for (int i = 0; i < files.length; i++) {
-			paths[i] = files[i].getPath();
-		}
-
-		return paths;
+		return files;
 	}
 
 	public static void escreveDados(ImagePlus pImg, String pImgClass) {
 		try // esta sintaxe faz parte do tratamento de exceções
 		{
 
-			File arquivo = new File("dataSet.arf");
+			File arquivo = new File("TesteSetgoogle.arff");
 			boolean arquivoExiste = arquivo.exists(); 
 			
 			// Código para apagar o dataSet e criar um novo vazio.
@@ -92,12 +95,12 @@ public class Teste1 {
 				for (int i = 0; i < histogram.length; i++) {
 					escreve.write("@attribute ");
 					escreve.write("TOM_" + i);
-					escreve.write(" int");
+					escreve.write(" REAL");
 					escreve.newLine();
 				}
 
 				escreve.write("@attribute ");
-				escreve.write("class string");
+				escreve.write("class {carro,folha}");
 				escreve.newLine();
 				escreve.newLine();
 
