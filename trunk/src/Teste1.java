@@ -31,14 +31,18 @@ public class Teste1 {
 			//imp.show();
 			hist = imp.getProcessor().getHistogram();
 			
-			if(files[i].getName().charAt(0)=='c') classe="carro";
-			else classe="folha";
+			//if(files[i].getName().charAt(0)=='c') classe="carro";
+			//else classe="folha";
+			classe = "anfibio";
+			//classe = "ave";
+			//classe = "mamifero";
 			
 			escreveDados(imp, classe);
 			
 		}
 		
 		System.out.println("terminou");
+		System.exit(0);
 
 	}
 
@@ -62,7 +66,7 @@ public class Teste1 {
 		try // esta sintaxe faz parte do tratamento de exceções
 		{
 
-			File arquivo = new File("TesteSetgoogle.arff");
+			File arquivo = new File("dataSetGlobalCinzaTest.arff");
 			boolean arquivoExiste = arquivo.exists(); 
 			
 			// Código para apagar o dataSet e criar um novo vazio.
@@ -100,7 +104,7 @@ public class Teste1 {
 				}
 
 				escreve.write("@attribute ");
-				escreve.write("class {carro,folha}");
+				escreve.write("class {mamifero,anfibio,ave}");
 				escreve.newLine();
 				escreve.newLine();
 
@@ -112,7 +116,8 @@ public class Teste1 {
 			// Escreve todos o valor de cada atributo e 
 			// no final do laço escreve a classe (por enquanto é o nome do path)
 			for (int i = 0; i < histogram.length; i++) {
-				escreve.write(histogram[i] + ",");
+				float valor = ((float)100*histogram[i]/(pImg.getHeight()*pImg.getWidth()));
+				escreve.write( valor + ",");
 			}
 			escreve.write(pImgClass);
 
