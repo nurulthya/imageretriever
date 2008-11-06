@@ -15,6 +15,8 @@ public class MainTeste {
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 		
+		
+		
 		Classification c= new Classification();
 		Instances train= c.arffToInstances("dataSetGlobalCinzaEveryBody.arff");
 		Instances t= c.arffToInstances("dataSetGlobalCinzaTest.arff");
@@ -22,7 +24,7 @@ public class MainTeste {
 	    SMO svm = new SMO();
 		c.buildClassifier(svm, train);
 		
-		Instance teste = t.instance(10);
+		Instance teste = t.instance(29);
 		
 		System.out.println("valor inst:"+teste.classValue());
 		System.out.println("valor predict:"+svm.classifyInstance(teste));
