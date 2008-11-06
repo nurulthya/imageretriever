@@ -26,6 +26,7 @@ public class FeatureExtractors {
 	 public int[][] HSBextractor(ImagePlus imp) {
          int w = imp.getWidth();
          int h = imp.getHeight();
+         int npixels = w*h;
          ImageStack hsbStack = imp.getStack();
          ImageStack hueStack = new ImageStack(w,h);
          ImageStack satStack = new ImageStack(w,h);
