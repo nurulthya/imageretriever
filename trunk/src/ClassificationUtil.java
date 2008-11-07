@@ -56,9 +56,9 @@ public class ClassificationUtil {
 	 * @return - Instances pelo arff
 	 * @throws Exception
 	 */
-	public Instances arffToInstances(String arff) throws Exception{
+	public Instances arffToInstances(String arffPath) throws Exception{
 		
-		DataSource source = new DataSource(arff);
+		DataSource source = new DataSource(arffPath);
 		Instances data = source.getDataSet();
 		 // setting class attribute if the data format does not provide this information
 		 // E.g., the XRFF format saves the class attribute information as well
