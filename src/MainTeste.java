@@ -1,3 +1,5 @@
+import extractors.HSBHistogram;
+import ij.ImagePlus;
 import weka.classifiers.*;
 import weka.classifiers.functions.SMO;
 import weka.classifiers.trees.J48;
@@ -17,19 +19,26 @@ public class MainTeste {
 		
 		
 		
-		Classification c= new Classification();
-		Instances train= c.arffToInstances("dataSetGlobalCinzaEveryBody.arff");
-		Instances t= c.arffToInstances("dataSetGlobalCinzaTest.arff");
-
-	    SMO svm = new SMO();
-		c.buildClassifier(svm, train);
+//		Classification c= new Classification();
+//		Instances train= c.arffToInstances("dataSetGlobalCinzaEveryBody.arff");
+//		Instances t= c.arffToInstances("dataSetGlobalCinzaTest.arff");
+//
+//	    SMO svm = new SMO();
+//		c.buildClassifier(svm, train);
+//		
+//		Instance teste = t.instance(29);
+//		
+//		System.out.println("valor inst:"+teste.classValue());
+//		System.out.println("valor predict:"+svm.classifyInstance(teste));
 		
-		Instance teste = t.instance(29);
+		ImagePlus img= new ImagePlus("data/images/naja (1).jpg");
+		img.show();
 		
-		System.out.println("valor inst:"+teste.classValue());
-		System.out.println("valor predict:"+svm.classifyInstance(teste));
+		HSBHistogram hsb = new HSBHistogram();
+		double f[]= hsb.getFeatures(img);
+		hsb.getAttributesNames();
 		
-		
+	
 
 	}
 
