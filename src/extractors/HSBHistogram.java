@@ -96,7 +96,6 @@ public class HSBHistogram  implements Extractors{
 		}
 
 
-
 		return features;
 	}
 
