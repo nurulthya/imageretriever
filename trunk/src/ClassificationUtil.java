@@ -7,7 +7,7 @@ import weka.core.Instances;
 import weka.core.converters.ConverterUtils.DataSource;
 
 
-public class Classification {
+public class ClassificationUtil {
 	
 	
 	
@@ -17,6 +17,29 @@ public class Classification {
 		cls.buildClassifier(train);
 		
 		return cls;
+	}
+	
+	/**
+	 * Saves a built classifier
+	 * @param cls - built classifier
+	 * @param name - classifier name
+	 * @throws Exception
+	 */
+	public void saveModel(Classifier cls, String name) throws Exception{
+		
+		weka.core.SerializationHelper.write("data/models/"+name+".model", cls);	
+	
+	}
+	
+	/**
+	 * Loads a built classifier
+	 * @param name - classifier name
+	 * @return - The built classifier
+	 * @throws Exception
+	 */
+	public Classifier loadModel(String name) throws Exception{
+		
+		return (Classifier) weka.core.SerializationHelper.read("data/models/"+name+".model");
 	}
 	
 	
