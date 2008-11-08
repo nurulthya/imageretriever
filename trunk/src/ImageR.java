@@ -40,7 +40,7 @@ public class ImageR {
 		
 		this.instance=ins;
 		features= new ArrayList<double[]>();
-		this.nome_img=img.getTitle();
+
 	}
 	
 	/**

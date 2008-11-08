@@ -14,18 +14,18 @@ public class HSBHistogram  implements Extractors{
 	
 	public String[] getAttributesNames() {
 		// TODO Auto-generated method stub
-		String attributes[] = new String[765];
+		String attributes[] = new String[768];
 		
 		char hsb[]={'h','s','b'};
 		int j=0;
         int k=0;		
 		
-		for(int i=0; i<765; i++){
+		for(int i=0; i<768; i++){
 
-			attributes[i]="@attribute "+hsb[j]+"_"+i+" REAL";
+			attributes[i]="@attribute "+hsb[j]+"_"+k+" REAL";
 			k++;
 
-			if(k==255){
+			if(k==256){
 				j++;
 				k=0;
 			}
@@ -57,7 +57,7 @@ public class HSBHistogram  implements Extractors{
 			hue = new byte[w*h];
 			s = new byte[w*h];
 			b = new byte[w*h];
-			cp = (ColorProcessor)hsbStack.getProcessor(1);
+			cp = (ColorProcessor) hsbStack.getProcessor(1);
 			cp.getHSB(hue,s,b);
 			hsbStack.deleteSlice(1);
 
@@ -68,7 +68,7 @@ public class HSBHistogram  implements Extractors{
 		}
 
 
-		int hsb[][] = new int[3][255];
+		int hsb[][] = new int[3][256];
 
 
 
@@ -79,17 +79,17 @@ public class HSBHistogram  implements Extractors{
 
 
 		// coloa a matriz em um unico vetor
-		double features[]= new double[765];
+		double features[]= new double[768];
 
 		int j=0;
 		int k=0;
 
-		for(int i=0; i<765; i++){
+		for(int i=0; i<768; i++){
 
 			features[i]=hsb[j][k];
 			k++;
 
-			if(k==255){
+			if(k==256){
 				j++;
 				k=0;
 			}

@@ -1,8 +1,6 @@
-import weka.classifiers.Classifier;
-import weka.core.Attribute;
+import weka.core.Instance;
 import weka.core.Instances;
-import extractors.Extractors;
-import extractors.HSBHistogram;
+
 
 
 public class MainTeste {
@@ -37,27 +35,55 @@ public class MainTeste {
 		//		double f[]= hsb.getFeatures(img);
 		//		hsb.getAttributesNames();
 
+
+		// teste de classificacao com nova estrutura
+		//		ClassificationUtil util = new ClassificationUtil();
+		//		Classifier j48 = util.loadModel("j48_cinza_everybody");
+		//		Instances datateste= util.arffToInstances("data/datasets/dataSetGlobalCinzaEveryBodyTest.arff");
+		//
+		//
+		//		String[] classes={"tucano", "frog" ,"pato", "baleia", "elefante", "leao", "naja"};
+		//
+		//		Extractors extrac[]= {new HSBHistogram()};
+		//		
+		//		ImageR img = new ImageR(1,"data/images/naja (1).jpg");
+		//		img.setInstance(datateste.instance(19));
+
+
+
+
+		//DataSetGenerator d= new DataSetGenerator();
+
 		ClassificationUtil util = new ClassificationUtil();
-		Classifier j48 = util.loadModel("j48_cinza_everybody");
-		Instances datateste= util.arffToInstances("data/datasets/dataSetGlobalCinzaEveryBodyTest.arff");
+		Instances datateste= util.arffToInstances("data/datasets/dataSet_teste_hist_color_gray.arff");
 
+		Tree arvore = new Tree();
+		Node no = arvore.raiz;
+		String result;
 
-		String[] classes={"tucano", "frog" ,"pato", "baleia", "elefante", "leao", "naja"};
+		for(int i=0; i<datateste.numInstances();i++){
 
-		Extractors extrac[]= {new HSBHistogram()};
+			while(!no.isLinkedNodeEmpty()){
+
+				Instance inst= new Instance(1,datateste.instance(i).toDoubleArray());
+				result=no.classify(new ImageR(i,inst));
+
+				for(int j=0; j<no.list_linked_nodes.size();j++){
+					
+					if(no.list_linked_nodes.get(j).nome_node.compareTo(result)==0){
+						no=no.list_linked_nodes.get(j);
+						no.setList_imgs(no.classes[(int)datateste.instance(i).classValue()]);
+						
+						System.out.println("no:"+ no.getNome_node());
+					}
+				}
+				
+			}
+		}
 		
-		ImageR img = new ImageR(1,"data/images/naja (1).jpg");
-		img.setInstance(datateste.instance(19));
-
-
-
-
-
-
-		Node raiz = new Node("coisa",classes,j48,extrac);
-		System.out.println(raiz.classify(img));
-
 		
+
+
 
 
 	}

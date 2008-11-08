@@ -19,9 +19,9 @@ public class GreyScaleHistogram implements Extractors {
 	 */
 	public String[] getAttributesNames() {
 		// TODO Auto-generated method stub
-		String attributes[] = new String[255];
+		String attributes[] = new String[256];
 
-		for (int i = 0; i < 255; i++) {
+		for (int i = 0; i <= 255; i++) {
 			attributes[i] = "@attribute " + "GreyIndice_" + i + " REAL";
 		}
 
