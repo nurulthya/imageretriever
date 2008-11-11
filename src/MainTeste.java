@@ -64,7 +64,7 @@ public class MainTeste {
 
 		for(int i=0; i<datateste.numInstances();i++){
 
-			while(!no.isLinkedNodeEmpty()){
+			
 
 				
 				//Instance inst= new Instance(1,datateste.instance(i).toDoubleArray());
@@ -85,8 +85,9 @@ public class MainTeste {
 					no=no.list_linked_nodes.get(j);
 					System.out.println("no:"+ no.getNome_node());
 				}
+				no = arvore.raiz;
 				
-			}
+			
 		}
 		
 		
