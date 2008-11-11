@@ -55,27 +55,35 @@ public class MainTeste {
 		//DataSetGenerator d= new DataSetGenerator();
 
 		ClassificationUtil util = new ClassificationUtil();
-		Instances datateste= util.arffToInstances("data/datasets/dataSet_teste_hist_color_gray.arff");
+		Instances datateste= util.arffToInstances("dataSet_teste_hist_color_gray.arff");
 
 		Tree arvore = new Tree();
 		Node no = arvore.raiz;
 		String result;
+		
 
 		for(int i=0; i<datateste.numInstances();i++){
 
 			while(!no.isLinkedNodeEmpty()){
 
-				Instance inst= new Instance(1,datateste.instance(i).toDoubleArray());
-				result=no.classify(new ImageR(i,inst));
+				
+				//Instance inst= new Instance(1,datateste.instance(i).toDoubleArray());
+				Instance ins = new Instance(datateste.instance(i));
+				ins.setDataset(no.getHeader());
+				
+				result=no.classify(new ImageR(i,ins));
+				
 
 				for(int j=0; j<no.list_linked_nodes.size();j++){
 					
 					if(no.list_linked_nodes.get(j).nome_node.compareTo(result)==0){
-						no=no.list_linked_nodes.get(j);
-						no.setList_imgs(no.classes[(int)datateste.instance(i).classValue()]);
 						
-						System.out.println("no:"+ no.getNome_node());
+						no.setList_imgs(no.classes[(int)datateste.instance(i).classValue()]);
+					
 					}
+					// o problema esta no laço
+					no=no.list_linked_nodes.get(j);
+					System.out.println("no:"+ no.getNome_node());
 				}
 				
 			}
