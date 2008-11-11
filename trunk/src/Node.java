@@ -13,8 +13,12 @@ public class Node {
 	public String[] classes;
 	
 	private Instances header;
+	
+	public int numInstances;
 	 
 	private ArrayList<String> list_imgs;
+	
+	public int[] correctInstances;
 	 
 	private Classifier classifier;
 	 
@@ -30,6 +34,9 @@ public class Node {
 		this.classes=classes;
 		this.classifier=cls;
 		this.list_extractors = extratores;
+		this.correctInstances = new int[classes.length];
+		
+		
 		
 		this.list_imgs= new ArrayList<String>();
 		
@@ -56,6 +63,12 @@ public class Node {
 		
 		//System.out.println("classe manual:"+ classes[(int)ins.classValue()]);
 		return  classes[cl];
+	}
+	
+	// Contador de imagens que entraram no No
+	public void correctClassificationAs(int indice){
+		
+		this.correctInstances[indice]++;
 	}
 	
 	public void setLinkedNode(Node n){
@@ -125,6 +138,10 @@ public class Node {
 
 	public void setHeader(Instances header) {
 		this.header = new Instances(header,0);
+	}
+	
+	public String getClasse(int indice){
+		return this.classes[indice];
 	}
 	
 	
