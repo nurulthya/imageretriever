@@ -71,20 +71,22 @@ public class MainTeste {
 				Instance ins = new Instance(datateste.instance(i));
 				ins.setDataset(no.getHeader());
 				
-				result=no.classify(new ImageR(i,ins));
 				
 
 				for(int j=0; j<no.list_linked_nodes.size();j++){
+						
+					result=no.classify(new ImageR(i,ins));
+					System.out.println(result+", "+no.list_linked_nodes.get(j).nome_node);
 					
 					if(no.list_linked_nodes.get(j).nome_node.compareTo(result)==0){
 						
 						no.setList_imgs(no.classes[(int)datateste.instance(i).classValue()]);
-					
+						no=no.list_linked_nodes.get(j);
+						System.out.println("entrou:"+ no.getNome_node());
 					}
-					// o problema esta no laço
-					no=no.list_linked_nodes.get(j);
-					System.out.println("no:"+ no.getNome_node());
+					
 				}
+				
 				no = arvore.raiz;
 				
 			

@@ -35,7 +35,7 @@ public class Tree {
 		extratores= new Extractors[]{new HSBHistogram(), new GreyScaleHistogram()};
 		Classifier cls2 = util.loadModel("aves");
 		
-		Node aves = new Node("aves",classes,cls2,extratores,"dataSet_aves_hist_color_gray.arff");
+		Node aves = new Node("ave",classes,cls2,extratores,"dataSet_aves_hist_color_gray.arff");
 		
 		// RELATIONS
 		
