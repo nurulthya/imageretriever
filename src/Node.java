@@ -4,12 +4,15 @@ import extractors.Extractors;
 
 import weka.classifiers.Classifier;
 import weka.core.Instance;
+import weka.core.Instances;
 
 public class Node {
  
 	public String nome_node;
 	 
 	public String[] classes;
+	
+	private Instances header;
 	 
 	private ArrayList<String> list_imgs;
 	 
@@ -19,7 +22,7 @@ public class Node {
 	 
 	public ArrayList<Node> list_linked_nodes;
 	
-	public Node(String nome, String[] classes, Classifier cls, Extractors[] extratores){
+	public Node(String nome, String[] classes, Classifier cls, Extractors[] extratores, String trainpath){
 		
 		this.list_imgs =new ArrayList<String>();
 		this.list_linked_nodes = new ArrayList<Node>();
@@ -29,6 +32,16 @@ public class Node {
 		this.list_extractors = extratores;
 		
 		this.list_imgs= new ArrayList<String>();
+		
+		Instances header = null;
+		try {
+			header = new ClassificationUtil().arffToInstances(trainpath);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		this.setHeader(header);
 	}
 	 
 	 
@@ -41,7 +54,7 @@ public class Node {
 		// classifica a instancia
 		int cl=(int)this.classifier.classifyInstance(ins);
 		
-		System.out.println("classe manual:"+ classes[(int)ins.classValue()]);
+		//System.out.println("classe manual:"+ classes[(int)ins.classValue()]);
 		return  classes[cl];
 	}
 	
@@ -103,6 +116,18 @@ public class Node {
 	public void setList_linked_nodes(ArrayList<Node> list_linked_nodes) {
 		this.list_linked_nodes = list_linked_nodes;
 	}
+
+
+	public Instances getHeader() {
+		return header;
+	}
+
+
+	public void setHeader(Instances header) {
+		this.header = new Instances(header,0);
+	}
+	
+	
 	 
 	 
 }
