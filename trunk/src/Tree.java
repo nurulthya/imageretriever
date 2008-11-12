@@ -33,27 +33,54 @@ public class Tree {
 
 		classes= new String[]{"pato","tucano"};
 		extratores= new Extractors[]{new HSBHistogram(), new GreyScaleHistogram()};
-		Classifier cls2 = util.loadModel("aves");
+		cls = util.loadModel("ave");
 
-		Node aves = new Node("ave",classes,cls2,extratores,"dataSet_aves_hist_color_gray.arff");
+		Node ave = new Node("ave",classes,cls,extratores,"dataSet_aves_hist_color_gray.arff");
+
+
+		// NO ANFIBIO
+
+		classes= new String[]{"frog","naja"};
+		extratores= new Extractors[]{new HSBHistogram(), new GreyScaleHistogram()};
+		cls = util.loadModel("anfibio");
+
+		Node anfibio = new Node("anfibio",classes,cls,extratores,"dataSet_anfibio_hist_color_gray.arff");
+
+		// NO MAMIFERO
+
+		classes= new String[]{"baleia","leao","elefante"};
+		extratores= new Extractors[]{new HSBHistogram(), new GreyScaleHistogram()};
+		cls = util.loadModel("mamifero");
+
+		Node mamifero = new Node("mamifero",classes,cls,extratores,"dataSet_mamifero_hist_color_gray.arff");
+
+
+
 
 		// RELATIONS
 
-		raiz.setLinkedNode(aves);
+		raiz.setLinkedNode(ave);
+
+		raiz.setLinkedNode(anfibio);
+		raiz.setLinkedNode(mamifero);
+
 
 		this.raiz=raiz;
 
 	}
 
+
 	public void printClasses(Node no){
 
 		if(no.list_linked_nodes.isEmpty()){
 
-			System.out.println("NInstancias:"+no.numInstances);
+			
+			System.out.println("NO:"+no.getNome_node()+":"+no.numInstances);
 			for(int i=0;i<no.classes.length;i++){
 
 				System.out.println(no.classes[i]+ ":" + no.correctInstances[i]);
 			}
+			System.out.println();
 		}else{
 			for(int i=0;i<no.getList_linked_nodes().size();i++){
 

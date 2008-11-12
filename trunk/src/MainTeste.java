@@ -55,11 +55,11 @@ public class MainTeste {
 		//DataSetGenerator d= new DataSetGenerator();
 
 		ClassificationUtil util = new ClassificationUtil();
-		Instances datateste= util.arffToInstances("dataSet_teste_hist_color_gray2.arff");
+		Instances datateste= util.arffToInstances("dataSet_teste_hist_color_gray.arff");
 
 		Tree arvore = new Tree();
 		Node no = arvore.raiz;
-		String result;
+		int result;
 		
 
 		for(int i=0; i<datateste.numInstances();i++){
@@ -79,18 +79,22 @@ public class MainTeste {
 						
 					//System.out.println(result+", "+no.list_linked_nodes.get(j).nome_node);
 					
-					if(no.list_linked_nodes.get(j-1).nome_node.compareTo(result)==0){
+					if(no.list_linked_nodes.get(j-1).nome_node.compareTo(no.classes[result])==0){
 						
 						no=no.list_linked_nodes.get(j-1);
 						no.numInstances++;
-						no.setList_imgs(no.classes[(int)ins.classValue()]);
 						ins.setDataset(no.getHeader());
+						no.setList_imgs((int)ins.classValue()+"");
+					//	System.out.println("classe ins:"+(ins.attribute(ins.classIndex())).value(0));
 						//System.out.println("entrou:"+ no.getNome_node());
 						result=no.classify(new ImageR(i,ins));
 						
 						//System.out.println(result+ ","+no.classes[(int)ins.classValue()]);
-						if(result.compareTo(no.classes[(int)ins.classValue()])==0){
-							no.correctClassificationAs((int)ins.classValue());
+						
+						
+						String classe_ins=(ins.attribute(ins.classIndex())).value(0);
+						if(no.classes[result].compareTo(classe_ins)==0){
+							no.correctClassificationAs(result);
 						}
 						
 						//System.out.println(no.getClasse((int)ins.classValue()));

@@ -31,8 +31,8 @@ public class DataSetGenerator {
 		
 		// CONFIGURACOES
 		aux=true;
-		nomeDataSet = "data/datasets/dataSet_teste_hist_color_gray.arff";
-		classesNames = "{pato,tucano}";
+		nomeDataSet = "data/datasets/dataSet_mamifero_hist_color_gray.arff";
+		classesNames = "{baleia,leao,elefante}";
 		relation= "histogramas";
 		
 		Extractors extratores[]={new HSBHistogram(), new GreyScaleHistogram()};
