@@ -52,7 +52,7 @@ public class Node {
 	}
 	 
 	 
-	public String classify(ImageR img) throws Exception {
+	public String getInstanceClassified(ImageR img) throws Exception {
 		
 		//gera a instancia de acordo com o Node
 		Instance ins=img.instanceGenerator(this.list_extractors);
@@ -63,6 +63,18 @@ public class Node {
 		
 		//System.out.println("classe manual:"+ classes[(int)ins.classValue()]);
 		return  classes[cl];
+	}
+	
+       public int classify(ImageR img) throws Exception {
+		
+		//gera a instancia de acordo com o Node
+		Instance ins=img.instanceGenerator(this.list_extractors);
+		// adiciona o nome da imagem na lista de imagens que entraram neste Node
+		//this.list_imgs.add(img.getNome());
+		// classifica a instancia
+	     return	(int)this.classifier.classifyInstance(ins);
+		
+		
 	}
 	
 	// Contador de imagens que entraram no No
