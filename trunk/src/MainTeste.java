@@ -55,7 +55,7 @@ public class MainTeste {
 		//DataSetGenerator d= new DataSetGenerator();
 
 		ClassificationUtil util = new ClassificationUtil();
-		Instances datateste= util.arffToInstances("dataSet_teste_hist_color_gray.arff");
+		Instances datateste= util.arffToInstances("dataSet_teste_hist_color_gray2.arff");
 
 		Tree arvore = new Tree();
 		Node no = arvore.raiz;
@@ -63,12 +63,12 @@ public class MainTeste {
 		
 
 		for(int i=0; i<datateste.numInstances();i++){
-
-			
-
 				
 				//Instance inst= new Instance(1,datateste.instance(i).toDoubleArray());
 				Instance ins = new Instance(datateste.instance(i));
+				
+				System.out.println("class_inst:"+ (datateste.instance(i).attribute(datateste.instance(i).classIndex())).value(1));
+				
 				ins.setDataset(no.getHeader());
 				
 				// primeira instancia
@@ -91,8 +91,9 @@ public class MainTeste {
 						
 						//System.out.println(result+ ","+no.classes[(int)ins.classValue()]);
 						
+						// Aqui classe_ins recebe classe da instancia datateste.instance(i), ou seja, antes dela possuir o novo dataset
+						String classe_ins=(datateste.instance(i).attribute(ins.classIndex())).value((int)ins.classValue());
 						
-						String classe_ins=(ins.attribute(ins.classIndex())).value(0);
 						if(no.classes[result].compareTo(classe_ins)==0){
 							no.correctClassificationAs(result);
 						}
