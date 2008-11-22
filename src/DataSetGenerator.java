@@ -10,6 +10,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 import extractors.Extractors;
+import extractors.GLCM_Texture;
 import extractors.GreyScaleHistogram;
 import extractors.HSBHistogram;
 
@@ -31,11 +32,11 @@ public class DataSetGenerator {
 		
 		// CONFIGURACOES
 		aux=true;
-		nomeDataSet = "data/datasets/dataSet_mamifero_hist_color_gray.arff";
-		classesNames = "{baleia,leao,elefante}";
-		relation= "histogramas";
+		nomeDataSet = "data/datasets/dataSet_testTextura.arff";
+		classesNames = "{pato,tucano,frog,naja,baleia,leao,elefante}";
+		relation= "textura";
 		
-		Extractors extratores[]={new HSBHistogram(), new GreyScaleHistogram()};
+		Extractors extratores[]={new GLCM_Texture(0,1)};
 		
 		
 		// Executa esta ação para todas as imagens selecionadas no filechooser
@@ -105,8 +106,7 @@ public class DataSetGenerator {
 			
 			BufferedWriter escreve = new BufferedWriter(new FileWriter(arquivo, true));
 			
-			int[] histogram = pImg.getProcessor().getHistogram();
-
+			
 			if (!arquivoExiste) {
 				escreve.write("% =============================================");
 				escreve.newLine();
