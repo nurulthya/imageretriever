@@ -25,7 +25,7 @@ public class Tree {
 
 		String[] classes={"mamifero","anfibio","ave"};
 		Extractors extratores[]={new HSBHistogram(), new GreyScaleHistogram()};
-		Classifier cls = util.loadModel("coisa");
+		Classifier cls = util.loadModel("coisa_smo");
 
 		Node raiz = new Node("coisa",classes,cls,extratores,"dataSet_Coisa_hist_color_gray.arff");
 
@@ -33,7 +33,7 @@ public class Tree {
 
 		classes= new String[]{"pato","tucano"};
 		extratores= new Extractors[]{new HSBHistogram(), new GreyScaleHistogram()};
-		cls = util.loadModel("ave");
+		cls = util.loadModel("ave_smo");
 
 		Node ave = new Node("ave",classes,cls,extratores,"dataSet_aves_hist_color_gray.arff");
 
@@ -42,7 +42,7 @@ public class Tree {
 
 		classes= new String[]{"frog","naja"};
 		extratores= new Extractors[]{new HSBHistogram(), new GreyScaleHistogram()};
-		cls = util.loadModel("anfibio");
+		cls = util.loadModel("anfibio_smo");
 
 		Node anfibio = new Node("anfibio",classes,cls,extratores,"dataSet_anfibio_hist_color_gray.arff");
 
@@ -50,7 +50,7 @@ public class Tree {
 
 		classes= new String[]{"baleia","leao","elefante"};
 		extratores= new Extractors[]{new HSBHistogram(), new GreyScaleHistogram()};
-		cls = util.loadModel("mamifero");
+		cls = util.loadModel("mamifero_smo");
 
 		Node mamifero = new Node("mamifero",classes,cls,extratores,"dataSet_mamifero_hist_color_gray.arff");
 
